@@ -1,0 +1,18 @@
+/* miniprogram/pages/wish_list/wish_list.wxss */
+page,
+.page,
+.page__bd{
+    height: 100%;
+}
+.page__bd{
+    padding-bottom: 0;
+}
+.weui-tab__content{
+    padding-top: 60px;
+    text-align: center;
+}
+
+.motto{
+  margin-top: 150px;
+  text-align: center
+}

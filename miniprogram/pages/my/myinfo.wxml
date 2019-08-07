@@ -1,0 +1,45 @@
+<!--miniprogram/pages/my/myinfo.wxml-->
+<text>miniprogram/pages/my/myinfo.wxml</text>
+<view class="weui-cells weui-cells_after-title">
+</view>
+
+<view class="index-exam-inlets row">
+  <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="choseImage">
+    <view class="weui-cell__ft weui-cell__ft_in-access">
+      <image class="head_img" src="{{userinfo.head_img?userinfo.head_img:'/images/default_head_circle.png'}}">
+      </image>
+    </view>
+  </view>
+
+  <view class="row" style="clear: both;">
+    <view bindtap="exercise" data-type='My_certified_Info' class="index-exam-inlets-list col-hg-4" bindtap='bind_mySubInfo'>
+      <view class="icon-index-zj"></view>
+      <view class="text">认证信息</view>
+    </view>
+    <view bindtap="bindUrlToStore" data-type='My_released_Room' class="index-exam-inlets-list col-hg-4" bindtap='bind_mySubInfo'>
+      <view class="icon-index-zx"></view>
+      <view class="text">我的发布</view>
+    </view>
+    <view bindtap="bindUrlToWrong" data-type='My_comment' class="index-exam-inlets-list col-hg-4" bindtap='bind_mySubInfo'>
+      <view class="icon-index-zx"></view>
+      <view class="text">我的评价</view>
+    </view>
+  </view>
+
+  <view class="row" style="clear: both;">
+    <view bindtap="exercise" data-type='Contact_us' class="index-exam-inlets-list col-hg-4" bindtap='bind_mySubInfo'>
+      <view class="icon-index-zj"></view>
+      <view class="text">联系我们</view>
+    </view>
+    <view bindtap="exercise" data-type='About_us' class="index-exam-inlets-list col-hg-4" bindtap='bind_mySubInfo'>
+      <view class="icon-index-zx"></view>
+      <view class="text">关于我们</view>
+    </view>
+    <view bindtap="exercise" data-type='Authorization_settings' class="index-exam-inlets-list col-hg-4" bindtap='bind_mySubInfo'>
+      <view class="icon-index-zx"></view>
+      <view class="text">授权设置</view>
+    </view>
+  </view>
+</view>
+
+<button class="weui-btn" type="primary" bindtap='bind_statistic'>查看做题情况</button>
