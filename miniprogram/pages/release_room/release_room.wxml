@@ -1,20 +1,58 @@
-<!--miniprogram/pages/release_room/release_room.wxml-->
-<text>miniprogram/pages/release_room/release_room.wxml</text>
-<view class="page">
-    <view class="page__bd">
-        <view class="weui-tab">
-            <view class="weui-navbar">
-                <block wx:for="{{tabs}}" wx:key="*this">
-                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
-                        <view class="weui-navbar__title">{{item}}</view>
-                    </view>
-                </block>
-                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
-            </view>
-            <view class="weui-tab__panel">
-                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">发布房源</view>
-                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">找房源</view>
-            </view>
-        </view>
+<!--index.wxml-->
+<view class="container">
+
+  <!-- 用户 openid -->
+  <view class="userinfo">
+    <button 
+      open-type="getUserInfo" 
+      bindgetuserinfo="onGetUserInfo"
+      class="userinfo-avatar"
+      style="background-image: url({{avatarUrl}})"
+    ></button>
+    <!-- <view>
+      <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button>
+    </view> -->
+  </view>
+
+
+  <!-- 上传房源图片 -->
+  <view class="uploader">
+    <view class="uploader-text" bindtap="doUpload">
+      <text>发布房源</text>
     </view>
+    <view class="uploader-container" wx:if="{{imgUrl}}">
+      <image class="uploader-image" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
+    </view>
+  </view>
+
+  <!-- 查看房源图片 -->
+  <view class="uploader">
+    <view class="uploader-text" bindtap="doViewRoomInfo">
+      <text>查看房源</text>
+    </view>
+  </view>
+
+
+  <!-- 操作数据库 -->
+  <view class="uploader">
+    <navigator url="../databaseGuide/databaseGuide" open-type="navigate" class="uploader-text">
+      <text>前端操作数据库</text>
+    </navigator>
+  </view>
+
+  <!-- 新建云函数 -->
+  <view class="uploader">
+    <navigator url="../addFunction/addFunction" open-type="navigate" class="uploader-text">
+      <text>快速新建云函数</text>
+    </navigator>
+  </view>
+
+  <!-- 云调用 -->
+  <view class="uploader">
+    <navigator url="../openapi/openapi" open-type="navigate" class="uploader-text">
+      <text>云调用</text>
+    </navigator>
+  </view>
+
+
 </view>
