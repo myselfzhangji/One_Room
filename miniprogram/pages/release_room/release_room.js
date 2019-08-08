@@ -1,5 +1,6 @@
 //index.js
 const app = getApp()
+const db  = wx.cloud.database()
 
 Page({
   data: {
@@ -7,7 +8,9 @@ Page({
     userInfo: {},
     logged: false,
     takeSession: false,
-    requestResult: ''
+    requestResult: '',
+    imgUrl:'',
+    count: 0
   },
 
   onLoad: function () {
@@ -70,8 +73,9 @@ Page({
   // 上传图片
   doUpload: function () {
     // 选择图片
+    var that = this;
     wx.chooseImage({
-      count: 1,
+      count: 9,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
@@ -80,38 +84,52 @@ Page({
           title: '上传中',
         })
 
-        const filePath = res.tempFilePaths[0]
+        //const filePath = res.tempFilePaths[0]
+        const filePath = res.tempFilePaths;
+        that.setData({
+          imgUrl: filePath
+        })
 
         // 上传图片
         // 这部分可以自行处理图片的命名方式，这里图片进行了固定命名为 my-image
-        const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
-        wx.cloud.uploadFile({
-          cloudPath,
-          filePath,
-          success: res => {
-            console.log('[上传文件] 成功：', res)
-
-            app.globalData.fileID = res.fileID
-            app.globalData.cloudPath = cloudPath
-            app.globalData.imagePath = filePath
-            console.log('1qaz', app.globalData.fileID)
-
-            wx.navigateTo({
-              url: '../storageConsole/storageConsole'
-            })
-          },
-          fail: e => {
-            console.error('[上传文件] 失败：', e)
-            wx.showToast({
-              icon: 'none',
-              title: '上传失败',
-            })
-          },
-          complete: () => {
-            wx.hideLoading()
-          }
+       // const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
+        const cloudPath = [];
+        filePath.forEach ((item, i) => {
+          cloudPath.push(that.data.count + '_' + i + filePath[i].match(/\.[^.]+?$/)[0])
+          that.data.count++
         })
+        console.log('cloudPath', cloudPath)
 
+        filePath.forEach((item, i) =>{
+          wx.cloud.uploadFile({
+            cloudPath: cloudPath[i],
+            filePath: filePath[i], 
+            success: res => {
+              console.log('[上传文件] 成功：', res)
+
+              app.globalData.fileID = res.fileID
+              app.globalData.cloudPath = cloudPath
+              app.globalData.imagePath = filePath
+              console.log('fileID', app.globalData.fileID)
+              console.log('cloudPath', app.globalData.cloudPath)
+              console.log('imagePath', app.globalData.imagePath)
+
+              wx.navigateTo({
+                url: '../storageConsole/storageConsole'
+              })
+            },
+            fail: e => {
+              console.error('[上传文件] 失败：', e)
+              wx.showToast({
+                icon: 'none',
+                title: '上传失败',
+              })
+            },
+            complete: () => {
+              wx.hideLoading()
+            }
+          })
+        })
       },
       fail: e => {
         console.error(e)
@@ -121,19 +139,25 @@ Page({
 
   /* 查看房源信息 */
   doViewRoomInfo: function () {
-    const {
-      fileID,
-      cloudPath,
-      imagePath,
-    } = app.globalData
-
-    console.log('xsw2', app.globalData.fileID)
-
-    this.setData({
-      fileID,
-      cloudPath,
-      imagePath,
+    db.collection('counters').get({
+      success(res) {
+        console.log('database', res)
+      }
     })
+
+    // const {
+    //   fileID,
+    //   cloudPath,
+    //   imagePath,
+    // } = app.globalData
+
+    // console.log('xsw2', app.globalData.fileID)
+
+    // this.setData({
+    //   fileID,
+    //   cloudPath,
+    //   imagePath,
+    // })
 
     // wx.cloud.downloadFile({
     //   fileID: 'cloud://test-kmay4.7465-test-kmay4-1259785893/my-image.png', // 文件 ID
