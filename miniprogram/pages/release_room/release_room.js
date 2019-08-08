@@ -9,8 +9,8 @@ Page({
     logged: false,
     takeSession: false,
     requestResult: '',
-    imgUrl:'',
-    count: 0
+    count: 0,
+    bigImg: ''
   },
 
   onLoad: function () {
@@ -86,9 +86,6 @@ Page({
 
         //const filePath = res.tempFilePaths[0]
         const filePath = res.tempFilePaths;
-        that.setData({
-          imgUrl: filePath
-        })
 
         // 上传图片
         // 这部分可以自行处理图片的命名方式，这里图片进行了固定命名为 my-image
@@ -106,14 +103,38 @@ Page({
             filePath: filePath[i], 
             success: res => {
               console.log('[上传文件] 成功：', res)
+              that.setData({
+                bigImg:res.fileID
+              })
 
               app.globalData.fileID = res.fileID
               app.globalData.cloudPath = cloudPath
               app.globalData.imagePath = filePath
+
+              let fileID = res.fileID
               console.log('fileID', app.globalData.fileID)
               console.log('cloudPath', app.globalData.cloudPath)
               console.log('imagePath', app.globalData.imagePath)
 
+              db.collection('counters').add({
+                data:{
+                  bigImg:fileID
+                },
+                success:function(){
+                  wx.showToast({
+                    title: '图片存储成功',
+                    'icon':'none',
+                    duration:3000
+                  })
+                },
+                fail:function(){
+                  wx.showToast({
+                    title: '图片存储失败',
+                    'icon': 'none',
+                    duration: 3000
+                  })
+                }
+              })
               wx.navigateTo({
                 url: '../storageConsole/storageConsole'
               })
@@ -140,8 +161,16 @@ Page({
   /* 查看房源信息 */
   doViewRoomInfo: function () {
     db.collection('counters').get({
-      success(res) {
+      success:res => {
         console.log('database', res)
+        wx.cloud.downloadFile({
+          fileID: 'cloud://test-kmay4.7465-test-kmay4-1259785893/0_0.jpg', // 文件 ID
+          success: res => {
+            // 返回临时文件路径
+            console.log('aqwsxz', res.tempFilePath)
+          },
+          fail: console.error
+        })
       }
     })
 
