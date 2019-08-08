@@ -28,7 +28,7 @@
   <!-- 查看房源图片 -->
   <view class="uploader">
     <view class="uploader-text" bindtap="doViewRoomInfo">
-      <text>查看房源</text>
+      <text>查看我的发布</text>
     </view>
   </view>
 

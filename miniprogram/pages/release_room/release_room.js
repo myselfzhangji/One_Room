@@ -94,6 +94,7 @@ Page({
             app.globalData.fileID = res.fileID
             app.globalData.cloudPath = cloudPath
             app.globalData.imagePath = filePath
+            console.log('1qaz', app.globalData.fileID)
 
             wx.navigateTo({
               url: '../storageConsole/storageConsole'
@@ -125,6 +126,8 @@ Page({
       cloudPath,
       imagePath,
     } = app.globalData
+
+    console.log('xsw2', app.globalData.fileID)
 
     this.setData({
       fileID,
