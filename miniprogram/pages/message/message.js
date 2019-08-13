@@ -1,95 +1,51 @@
-// miniprogram/pages/message/message.js
-var sliderWidth = 60; // 需要设置slider的宽度，用于计算中间位置
+// pages/message/message.js
+const app = getApp()
+const db = wx.cloud.database()
+const msg = db.collection('message')
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    tabs: ["发出", "收到"],
-    activeIndex: 1,
-    sliderOffset: 0,
-    sliderLeft: 0
+    msgData: []
   },
-
-  choseImage: function () {
-  },
-
-  openAlert: function (e) {
-    wx.showToast({
-      title: e,
-      icon: "none"
+  changeInputValue(ev) {
+    this.setData({
+      inputVal: ev.detail.value
     })
   },
+  //删除留言
+  DelMsg(ev) {
+    var n = ev.target.dataset.index;
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function () {
-    var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 4,
-          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
-        });
-      }
-    });
-  },
+    var list = this.data.msgData;
+    list.splice(n, 1);
 
-  tabClick: function (e) {
     this.setData({
-      sliderOffset: e.currentTarget.offsetLeft,
-      activeIndex: e.currentTarget.id
+      msgData: list
+
     });
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  //添加留言
+  addMsg() {
+    var list = this.data.msgData;
+    console.log('hdhjfhh',list)
+    list.push({
+      msg: this.data.inputVal
+    });
+    //更新
+    this.setData({
+      msgData: list,
+      inputVal: ''
+    });
+    msg.add({
+      data: {
+        msg: list
+      },
+      success: res2 => {
+        //console.log(res2)
+        wx.showToast({
+          title: '新增成功',
+        })
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

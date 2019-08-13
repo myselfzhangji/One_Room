@@ -1,4 +1,4 @@
-/**index.wxss**/
+/* pages/release_room/show_release.wxss */
 .item-container {
   display: flex;
 }
@@ -36,4 +36,17 @@
   border-radius: 50%;
   color:white;
   width: 50rpx;
+}
+
+.selects{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.selects>.select{
+  margin: 10rpx;
+  float: left;
+  width: 195rpx;
+}
+.selects>.select>.btn{
+ background-color: #FFFFFF;
 }

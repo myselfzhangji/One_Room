@@ -1,18 +1,44 @@
-/* miniprogram/pages/message/message.wxss */
-page,
-.page,
-.page__bd{
-    height: 100%;
-}
-.page__bd{
-    padding-bottom: 0;
-}
-.weui-tab__content{
-    padding-top: 60px;
-    text-align: center;
+/* pages/message/message.wxss */
+
+.msg-box {
+  padding: 20px;
 }
 
-.motto{
-  margin-top: 150px;
-  text-align: center
+.send-box {
+  display: flex;
+}
+
+.input {
+  border: 1px solid #b0c4de;
+  padding: 5px;
+}
+
+.msg-info {
+  display: block;
+  margin: 10px 0 0 0;
+  color: #390;
+}
+
+.place-input {
+  color: salmon;
+}
+
+.list-view {
+  margin: 20px 0 0 0;
+}
+
+.item {
+  overflow: hidden;
+  border-bottom: 1px dashed #87ceff;
+  height: 30px;
+  line-height: 30px;
+}
+
+.text1 {
+  float: left;
+}
+
+.close-btn {
+  float: right;
+  margin: 5px 5px 0 0;
 }

@@ -1,22 +1,42 @@
 <!--index.wxml-->
-<!-- <van-button type="primary">默认按钮</van-button> -->
+<!-- <view class="container">
+  <view class="userinfo">
+  
+  <image src="cloud://test-kmay4.7465-test-kmay4-1259785893/room-u59EtKexGJk2d974a24237a9dc71fb0f9ab35c327dc2"></image>
 
-<block wx:for="{{userList}}">
-<navigator url='../user/user?id={{item._openid}}'>
-<van-card 
-  title="{{item.nickName}}" 
-  desc="{{item.province}}" 
-  centered
-  thumb-class="thumb-class"
-  thumb="{{item.avatarUrl}}" />
-</navigator>
-</block>
-<view class='floatBtn'>
-  <button 
-    size="mini" 
-    bindtap='navigatTo' 
-    type="primary"
-    open-type="getUserInfo"
-    bindgetuserinfo="getUserInfo"
-    >+</button>
+  <button
+  open-type="getUserInfo" 
+  bindgetuserinfo='getUserInfo'
+  >登录</button>
+  <block>
+  <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
+  <button type='primary' bindtap='addMall'>添加商品</button>
+  <button type='primary' bindtap='getMall'>获取商品</button>
+  </block> -->
+
+<!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block> -->
+<!-- </view> -->
+<!-- <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view> -->
+<!-- </view> -->
+
+<view>
+  <view wx:for="{{list}}" id="{{item._id}}" class="item-container" bindtap="toDetail">
+    <image lazy-lazy-load="true" mode='aspectFit' class="image" src="{{item.image}}"></image>
+    <view class='content'>
+    <view class="title">{{item.title}}</view>
+    <view>
+    <text class="tag" wx:for="{{item.tags}}">{{item}}</text>
+    </view>
+    </view>
+    <view class='action'>
+    <view>￥{{item.price}}</view>
+    <view class='wish' data-item="{{item}}" catchtap="addCart">+</view>
+    </view>
+  </view>
 </view>

@@ -1,13 +1,17 @@
 {
-	"miniprogramRoot": "miniprogram/",
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
+		"nodeModules": true,
 		"autoAudits": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
@@ -16,12 +20,16 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		},
-		"nodeModules": true
+		}
 	},
+	"compileType": "miniprogram",
+	"libVersion": "2.8.0",
 	"appid": "wx40bb073b88636bbb",
-	"projectname": "one_room",
-	"libVersion": "2.2.5",
+	"projectname": "myte",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
@@ -38,16 +46,30 @@
 			"list": []
 		},
 		"game": {
+			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 2,
 			"list": [
+				{
+					"id": -1,
+					"name": "Release Mode",
+					"pathName": "pages/release_room/release_room",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "Wish Mode",
+					"pathName": "pages/wish_list/wish_list",
+					"query": "",
+					"scene": null
+				},
 				{
 					"id": -1,
 					"name": "Message Mode",
 					"pathName": "pages/message/message",
-					"query": "",
 					"scene": null
 				}
 			]

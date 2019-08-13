@@ -1,6 +1,4 @@
 {
-  "usingComponents": {
-    "van-button": "../../vant-weapp/dist/button",
-    "van-card": "../../vant-weapp/dist/card"
-  }
+  "usingComponents": {},
+  "navigationBarTitleText" : "One Room一间房"
 }

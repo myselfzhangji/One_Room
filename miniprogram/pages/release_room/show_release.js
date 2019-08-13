@@ -1,4 +1,7 @@
-// pages/chooseLib/chooseLib.js
+// pages/release_room/show_release.js
+const app = getApp()
+const db = wx.cloud.database()
+
 Page({
 
   /**
@@ -12,7 +15,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    db.collection('emall').get({
+      success: res => {
+        console.log('kdjfkdjfjfl', res)
+        this.setData({
+          list: res.data
+        })
+      }
+    })
   },
 
   /**

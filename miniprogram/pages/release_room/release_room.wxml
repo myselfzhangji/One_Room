@@ -1,58 +1,108 @@
-<!--index.wxml-->
-<view class="container">
+<!--pages/release/release.wxml-->
 
-  <!-- 用户 openid -->
-  <view class="userinfo">
-    <button 
-      open-type="getUserInfo" 
-      bindgetuserinfo="onGetUserInfo"
-      class="userinfo-avatar"
-      style="background-image: url({{avatarUrl}})"
-    ></button>
-    <!-- <view>
-      <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button>
-    </view> -->
-  </view>
+<view class="page">
+  <view class="page__hd">
 
+    <view class='title_tab'>房租(元/月)</view>
+    <block>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input id='price' class="weui-input" placeholder="{{placeholder}}" value="{{value}}" bindchange='valuechange' />
+          </view>
+        </view>
+      </view>
+    </block>
 
-  <!-- 上传房源图片 -->
-  <view class="uploader">
-    <view class="uploader-text" bindtap="doUpload">
-      <text>发布房源</text>
+    <view class='title_tab'>小区名称</view>
+    <block>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input id='location' class="weui-input" placeholder="{{placeholder}}" value="{{value}}" bindchange='valuechange' />
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <view class='title_tab'>发布者(单选)</view>
+    <block wx:key="index" wx:for='{{ role }}'>
+      <view class='select' id='{{index}}' bindtap='chooseRole'>
+        <block wx:if="{{index==clickRoleId}}">
+          <button class='selects' style='color:black' size="mini">
+            {{item}}
+          </button>
+        </block>
+        <block wx:else>
+          <button class='noselects' style='color:black' size="mini">
+            {{item}}
+          </button>
+        </block>
+      </view>
+    </block>
+
+    <view class='title_tab'>租赁方式(单选)</view>
+    <block wx:key="index" wx:for='{{ rentMode }}'>
+      <view class='select' id='{{index}}' bindtap='chooseRentMode'>
+        <block wx:if="{{index==clickrentModeId}}">
+          <button class='selects' type="primary" style='color:black' size="mini">
+            {{item}}
+          </button>
+        </block>
+        <block wx:else>
+          <button class='noselects' style='color:black' size="mini">
+            {{item}}
+          </button>
+        </block>
+      </view>
+    </block>
+
+    <view class='title_tab'>附近地铁</view>
+    <view class='comment-btn'>
+      <button id='subway' wx:for="{{subway}}" wx:for-item="item" wx:key="item.index" bindtap="checkboxChange" data-value="{{item.value}}" data-index="{{index}}" checked="{{item.selected}}" class="btn {{item.selected ? 'btn-selected' : ''}}">
+        {{item.title}}
+      </button>
     </view>
-    <view class="uploader-container" wx:if="{{imgUrl}}">
-      <image class="uploader-image" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
+
+    <view class='title_tab'>地铁站台名</view>
+    <block>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input id='subway_station' class="weui-input" placeholder="{{placeholder}}" value="{{value}}" bindchange='valuechange' />
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <view class='title_tab'>备注(可多选)</view>
+    <view class='comment-btn'>
+      <button id='comment' wx:for="{{comment}}" wx:for-item="item" wx:key="item.index" bindtap="checkboxChange" data-value="{{item.value}}" data-index="{{index}}" checked="{{item.selected}}" class="btn {{item.selected ? 'btn-selected' : ''}}">
+        {{item.title}}
+      </button>
     </view>
-  </view>
 
-  <!-- 查看房源图片 -->
-  <view class="uploader">
-    <view class="uploader-text" bindtap="doViewRoomInfo">
-      <text>查看我的发布</text>
+    <view class="weui-cells">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title">房间照片</view>
+              <view class="weui-uploader__info">{{files.length}}</view>
+            </view>
+
+            <view class="weui-uploader__input-box">
+              <view class="weui-uploader__input" bindtap="addMyRoomInfo"></view>
+            </view>
+
+          </view>
+        </view>
+      </view>
     </view>
+
+    <block>
+      <button class='btn' type='primary' bindtap='release'>发布房源</button>
+      <button class='btn' type='primary' bindtap='getMall'>查看我的发布</button>
+    </block>
   </view>
-
-
-  <!-- 操作数据库 -->
-  <view class="uploader">
-    <navigator url="../databaseGuide/databaseGuide" open-type="navigate" class="uploader-text">
-      <text>前端操作数据库</text>
-    </navigator>
-  </view>
-
-  <!-- 新建云函数 -->
-  <view class="uploader">
-    <navigator url="../addFunction/addFunction" open-type="navigate" class="uploader-text">
-      <text>快速新建云函数</text>
-    </navigator>
-  </view>
-
-  <!-- 云调用 -->
-  <view class="uploader">
-    <navigator url="../openapi/openapi" open-type="navigate" class="uploader-text">
-      <text>云调用</text>
-    </navigator>
-  </view>
-
-
 </view>
