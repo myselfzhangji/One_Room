@@ -1,117 +1,101 @@
 //index.js
-const app = getApp()
-var sliderWidth = 24; // 需要设置slider的宽度，用于计算中间位置
-
+const db = wx.cloud.database()
+const userInfo = db.collection('userInfo')
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    avatarUrl: './user-unlogin.png',
-    userInfo: {},
-    logged: false,
-    takeSession: false,
-    requestResult: '',
-    inputShowed: false,
-    inputVal: "",
-    activeIndex: 0,
-    sliderOffset: 0,
-    sliderLeft: 0, 
-    tabs: ["推荐", "房源", "求租", "地图"]
+    userList: []
   },
 
-  showInput: function () {
-    this.setData({
-      inputShowed: true
-    });
-  },
-  hideInput: function () {
-    this.setData({
-      inputVal: "",
-      inputShowed: false
-    });
-  },
-  clearInput: function () {
-    this.setData({
-      inputVal: ""
-    });
-  },
-  inputTyping: function (e) {
-    this.setData({
-      inputVal: e.detail.value
-    });
-  },
-
-  tabClick: function (e) {
-    this.setData({
-      sliderOffset: e.currentTarget.offsetLeft,
-      activeIndex: e.currentTarget.id
-    });
-  },
-
-  onLoad: function() {
-    if (!wx.cloud) {
-      wx.redirectTo({
-        url: '../chooseLib/chooseLib',
-      })
-      return
-    }
-
-    var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 4,
-          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
-        });
-      }
-    });
-
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              this.setData({
-                avatarUrl: res.userInfo.avatarUrl,
-                userInfo: res.userInfo
-              })
-            }
-          })
-        }
-      }
-    })
-
-    // 调用云函数
-    wx.cloud.callFunction({
-      name: 'login',
-      data: {},
-      success: res => {
-        //console.log('[云函数] [login] user openid: ', res.result.openid)
-        console.log('12321',res)
-        app.globalData.openid = res.result.openid
-        wx.setStorageSync('openId', res.result.openid)
-        wx.navigateTo({
-          url: '../userConsole/userConsole',
-        })
-      },
-      fail: err => {
-        console.error('[云函数] [login] 调用失败', err)
-      }
-    })
-
-  },
-
-  onGetUserInfo: function(e) {
-    if (!this.logged && e.detail.userInfo) {
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    userInfo.get().then(res => {
+      //console.log(res.data)
       this.setData({
-        logged: true,
-        avatarUrl: e.detail.userInfo.avatarUrl,
-        userInfo: e.detail.userInfo
+        userList: res.data
       })
-    }
+    })
+
   },
 
-  onGetOpenid: function() {
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
   },
 
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+  navigatTo: function (event) {
+  },
+  getUserInfo: function (result) {
+    //console.log('haha', result)
+    wx.cloud.callFunction({
+      name: 'getOpenid',
+      complete: res => {
+        //console.log('haha', res)
+        userInfo.where({
+          _openid: res.result.openId
+        }).count().then( res => {
+          //console.log('res', res.total)
+          if (res.total == 0){
+            userInfo.add({
+              data: result.detail.userInfo
+            }).then(res => {
+              //console.log('edfcg',res)
+              wx.navigateTo({
+                url: '../add/add',
+              })
+            }).catch(err => {
+              console.error(err)
+            })
+          }else{
+            wx.navigateTo({
+              url: '../add/add',
+            })
+          }
+        });
+      
+      }
+    })
+    
+  }
 })
