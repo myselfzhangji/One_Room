@@ -26,7 +26,7 @@
 <!-- </view> -->
 
 <view>
-  <view wx:if="{{if_first_login == 0}}">
+  <view class="list-item" wx:if="{{if_first_login == 0}}">
     <block wx:for="{{userList}}">
       <navigator url='../user/user?id={{item._openid}}'>
         <van-card 

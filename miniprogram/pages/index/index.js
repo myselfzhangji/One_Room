@@ -6,8 +6,9 @@ const userInfo = db.collection('userInfo')
 
 Page({
   data: {
-    list:[],
+    list:[],             //商品信息
     if_first_login: 0,
+    userList: [],        //用户信息
   },
 
  /* 体检到心愿单 */
@@ -89,51 +90,48 @@ Page({
   },
 
   onLoad: function () {
-    // this.page = 0;
-    // this.getList(true)
-    // wx.showLoading({
-    //   title: '加载中...',
-    // })
-    // db.collection('emall').get({
-    //   success: res => {
-    //     console.log('ujhgty',res)
-    //     this.setData({
-    //       list: res.data
-    //     })
-    //       wx.hideLoading()
-    //   }
-    // })
+    userInfo.get().then(res => {
+      //console.log('who a u',res.data)
+      this.setData({
+        userList: res.data
+      })
+    })
   },
   getUserInfo: function (result) {
-    console.log('hello', result)
+    //console.log('hello', result)
+    this.setData({
+      if_first_login:1
+    })
+    wx.setStorageSync('if_first_login', this.data.if_first_login)
+    console.log('if_first_login=',this.data.if_first_login)
     wx.cloud.callFunction({
       name: 'getOpenid',
       complete: res => {
-        console.log('erfd', res)
-        // userInfo.where({
-        //   _openid: res.result.openId
-        // })
-        // userInfo.where({
-        //   _openid: res.result.openId
-        // }).count().then(res => {
-        //   console.log('res', res.total)
-        //   if (res.total == 0) {
-        //     userInfo.add({
-        //       data: result.detail.userInfo
-        //     }).then(res => {
-        //       //console.log(res)
-        //       // wx.navigateTo({
-        //       //   url: '../add/add',
-        //       // })
-        //     }).catch(err => {
-        //       console.error(err)
-        //     })
-        //   } else {
-        //     // wx.navigateTo({
-        //     //   url: '../add/add',
-        //     // })
-        //   }
-        // });
+        //console.log('erfd', res)
+        userInfo.where({
+          _openid: res.result.openId
+        })
+        userInfo.where({
+          _openid: res.result.openId
+        }).count().then(res => {
+          //console.log('res', res.total)
+          if (res.total == 0) {
+            userInfo.add({
+              data: result.detail.userInfo
+            }).then(res => {
+              //console.log(res)
+              // wx.navigateTo({
+              //   url: '../add/add',
+              // })
+            }).catch(err => {
+              console.error(err)
+            })
+          } else {
+            // wx.navigateTo({
+            //   url: '../add/add',
+            // })
+          }
+        });
 
       }
     })
