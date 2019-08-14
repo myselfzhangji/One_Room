@@ -26,17 +26,38 @@
 <!-- </view> -->
 
 <view>
-  <view wx:for="{{list}}" id="{{item._id}}" class="item-container" bindtap="toDetail">
-    <image lazy-lazy-load="true" mode='aspectFit' class="image" src="{{item.image}}"></image>
-    <view class='content'>
-    <view class="title">{{item.title}}</view>
-    <view>
-    <text class="tag" wx:for="{{item.tags}}">{{item}}</text>
+  <view wx:if="{{if_first_login == 0}}">
+    <block wx:for="{{userList}}">
+      <navigator url='../user/user?id={{item._openid}}'>
+        <van-card 
+        title="{{item.nickName}}" 
+        desc="{{item.province}}" 
+        centered thumb-class="thumb-class" 
+        thumb="{{item.avatarUrl}}" />
+      </navigator>
+    </block>
+    <view class='floatBtn'>
+      <button 
+      size="mini" 
+      bindtap='navigatTo' 
+      type="primary" 
+      open-type="getUserInfo" 
+      bindgetuserinfo="getUserInfo">授权登录</button>
     </view>
-    </view>
-    <view class='action'>
-    <view>￥{{item.price}}</view>
-    <view class='wish' data-item="{{item}}" catchtap="addCart">+</view>
+  </view>
+  <view wx:if="{{if_first_login == 1}}">
+    <view wx:for="{{list}}" id="{{item._id}}" class="item-container" bindtap="toDetail">
+      <image lazy-lazy-load="true" mode='aspectFit' class="image" src="{{item.image}}"></image>
+      <view class='content'>
+        <view class="title">{{item.title}}</view>
+        <view>
+          <text class="tag" wx:for="{{item.tags}}">{{item}}</text>
+        </view>
+      </view>
+      <view class='action'>
+        <view>￥{{item.price}}</view>
+        <view bindtap="getUserInfo" class='wish' data-item="{{item}}" catchtap="addCart">+</view>
+      </view>
     </view>
   </view>
 </view>

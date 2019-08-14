@@ -2,10 +2,12 @@
 //获取应用实例
 const app = getApp()
 const db = wx.cloud.database()
+const userInfo = db.collection('userInfo')
 
 Page({
   data: {
-    list:[]
+    list:[],
+    if_first_login: 0,
   },
 
  /* 体检到心愿单 */
@@ -29,7 +31,21 @@ Page({
    * 解决如果远程数据库删除一个记录后，如果不同步的话，本地数据记录仍然存在报错的问题
    */
   onShow: function () {
-    console.log('12345')
+    //console.log('12345')
+    wx.cloud.callFunction({
+      name: 'login',
+      success: res => {
+        console.log('1234', res)
+        //e.detail.userInfo.openid = res.result.openid
+        //需要openid
+        //app.globalData.userInfo = e.detail.userInfo
+        // this.setData({
+        //   userInfo: e.detail.userInfo
+        // })
+        // wx.setStorageSync('userInfo', e.detail.userInfo)
+      }
+    })
+
     db.collection('emall').get({
       success: res => {
         //console.log('current', res.data)
@@ -88,22 +104,40 @@ Page({
     //   }
     // })
   },
-  getUserInfo: function(e) {
-
+  getUserInfo: function (result) {
+    console.log('hello', result)
     wx.cloud.callFunction({
-      name: 'login',
-      success: res =>{
-        //console.log(res)
-        e.detail.userInfo.openid = res.result.openid
-        console.log('1234', e)
-        //需要openid
-        app.globalData.userInfo = e.detail.userInfo
-        this.setData({
-          userInfo: e.detail.userInfo
-        })
-        wx.setStorageSync('userInfo', e.detail.userInfo)
+      name: 'getOpenid',
+      complete: res => {
+        console.log('erfd', res)
+        // userInfo.where({
+        //   _openid: res.result.openId
+        // })
+        // userInfo.where({
+        //   _openid: res.result.openId
+        // }).count().then(res => {
+        //   console.log('res', res.total)
+        //   if (res.total == 0) {
+        //     userInfo.add({
+        //       data: result.detail.userInfo
+        //     }).then(res => {
+        //       //console.log(res)
+        //       // wx.navigateTo({
+        //       //   url: '../add/add',
+        //       // })
+        //     }).catch(err => {
+        //       console.error(err)
+        //     })
+        //   } else {
+        //     // wx.navigateTo({
+        //     //   url: '../add/add',
+        //     // })
+        //   }
+        // });
+
       }
     })
+
   },
 
   toDetail(e){
