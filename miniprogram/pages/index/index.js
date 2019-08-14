@@ -73,8 +73,8 @@ Page({
   },
 
   onLoad: function () {
-    this.page = 0;
-    this.getList(true)
+    // this.page = 0;
+    // this.getList(true)
     // wx.showLoading({
     //   title: '加载中...',
     // })
