@@ -1,4 +1,5 @@
 /* pages/wish_list/signin.wxss */
+
 page,
 .page,
 .page__bd{
@@ -15,4 +16,13 @@ page,
 .motto{
   margin-top: 150px;
   text-align: center
+}
+
+/* .content用来设置view组件居中显示*/
+.content{
+  display: flex;
+  align-items: center;
+  vertical-align: center;
+  justify-content: center;
+  flex-direction: row;
 }
