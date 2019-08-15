@@ -9,10 +9,6 @@
   flex: 1;
 }
 
-.content {
-  flex: 2;
-}
-
 .title {
   font-weight: bold;
 }
@@ -44,7 +40,19 @@
   border-radius: 150rpx;
 }
 .floatBtn{
-  position: fixed;
-  bottom: 50rpx;
-  right: 50rpx;
+  display: flex;
+  padding-top: 200px;
+  align-items: center;
+  vertical-align: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.content{
+  flex: 2;
+  display: flex;
+  align-items: center;
+  vertical-align: center;
+  justify-content: center;
+  flex-direction: row;
 }

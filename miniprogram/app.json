@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/wish_list/wish_list",
     "pages/index/index",
+    "pages/wish_list/wish_list",
     "pages/message/message",
     "pages/release_room/release_room",
     "pages/detail/detail",
