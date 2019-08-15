@@ -36,7 +36,7 @@ Page({
     wx.cloud.callFunction({
       name: 'login',
       success: res => {
-        console.log('1234', res)
+        //console.log('1234', res)
         //e.detail.userInfo.openid = res.result.openid
         //需要openid
         //app.globalData.userInfo = e.detail.userInfo
@@ -53,6 +53,10 @@ Page({
         wx.setStorageSync('carts', res.data)
       }
     })
+
+    if (this.data.if_first_login == 1) {
+      this.getMall(true)
+    }
   },
 
   //事件处理函数
@@ -61,16 +65,17 @@ Page({
       url: '../logs/logs'
     })
   },
-  // onPullDownRefresh(){
-  //   this.getList(true)
-  // },
+  onPullDownRefresh(){
+    this.getMall(true)
+  },
   // onReachBottom(){
   //   this.page += 1
-  //   this.getList(true)
+  //   this.getMall(true)
   // },
-  getList(isInit){
+  getMall(isInit){
     const PAGE = 5
-    db.collection('emall').skip(this.page * PAGE).limit(PAGE).get({
+    console.log('get emall')
+    db.collection('emall').get({
       success: res => {
         //console.log('ujhgty', res.data)
 
@@ -97,13 +102,14 @@ Page({
       })
     })
   },
+
   getUserInfo: function (result) {
     //console.log('hello', result)
     this.setData({
       if_first_login:1
     })
     wx.setStorageSync('if_first_login', this.data.if_first_login)
-    console.log('if_first_login=',this.data.if_first_login)
+    //console.log('if_first_login=',this.data.if_first_login)
     wx.cloud.callFunction({
       name: 'getOpenid',
       complete: res => {
@@ -132,10 +138,8 @@ Page({
             // })
           }
         });
-
       }
     })
-
   },
 
   toDetail(e){
