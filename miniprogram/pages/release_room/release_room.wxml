@@ -114,7 +114,7 @@
 
     <block>
       <button class='btn' type='primary' bindtap='release'>发布房源</button>
-      <button class='btn' type='primary' bindtap='getMall'>查看我的发布</button>
+      <button class='btn' type='primary' bindtap='getMall'>我的发布</button>
     </block>
   </view>
 </view>
