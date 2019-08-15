@@ -266,6 +266,7 @@ Page({
   },
 
   release(e){
+    //console.log('I am here', e)
     wx.cloud.uploadFile({
       cloudPath:this.data.cloudpath,  // 上传至云端的路径
       filePath:this.data.filepath,   // 小程序临时文件路径
@@ -276,7 +277,7 @@ Page({
             title: this.data.location + '有房出租',
             price: this.data.price + '/月',
             image: res.fileID,
-            inDate: date,
+            inDate: this.data.date,
           },
           success: res2 => {
             //console.log(res2)
