@@ -41,13 +41,19 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
 					"name": "Message Mode",
 					"pathName": "pages/message/message",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "Release Mode",
+					"pathName": "pages/release_room/release_room",
 					"scene": null
 				}
 			]

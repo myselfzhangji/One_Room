@@ -14,6 +14,18 @@
       </view>
     </block>
 
+    <view class='title_tab'>入住时间</view>
+    <picker 
+    class="weui-btn" 
+    mode="date" 
+    value="{{date}}" 
+    start="2019-08-15" 
+    end="2020-09-01" 
+    bindchange="bindDateChange">
+    <!-- <button type="default">日期选择器</button> -->
+    <view class="picker">{{date}}</view>
+    </picker>
+
     <view class='title_tab'>小区名称</view>
     <block>
       <view class="weui-cells weui-cells_after-title">

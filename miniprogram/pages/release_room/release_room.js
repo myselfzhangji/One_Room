@@ -80,6 +80,13 @@ Page({
     subway_station:'',
     filepath:'',
     cloudpath:'',
+    date: '2019-08-15',
+  },
+
+  bindDateChange: function (e) {
+    this.setData({
+      date: e.detail.value
+    })
   },
 
   valuechange: function (res) {
@@ -263,12 +270,13 @@ Page({
       cloudPath:this.data.cloudpath,  // 上传至云端的路径
       filePath:this.data.filepath,   // 小程序临时文件路径
       success: res => {
-        //console.log(res)
+        console.log('I am here',res)
         db.collection('emall').add({
           data: {
             title: this.data.location + '有房出租',
             price: this.data.price + '/月',
-            image: res.fileID
+            image: res.fileID,
+            inDate: date,
           },
           success: res2 => {
             //console.log(res2)
