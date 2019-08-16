@@ -1,0 +1,26 @@
+<!--miniprogram/pages/login/login.wxml-->
+<!-- <text>miniprogram/pages/login/login.wxml</text> -->
+
+<view>
+  <view class="list-item" wx:if="{{if_first_login == 0}}">
+    <block wx:for="{{userList}}">
+      <navigator url='../user/user?id={{item._openid}}'>
+        <van-card 
+        title="{{item.nickName}}" 
+        desc="{{item.province}}" 
+        centered thumb-class="thumb-class" 
+        thumb="{{item.avatarUrl}}" />
+      </navigator>
+    </block>
+    <view class='floatBtn'>
+      <button 
+      size="default" 
+      bindtap='navigatTo' 
+      type="primary" 
+      open-type="getUserInfo" 
+      bindgetuserinfo="getUserInfo">授权登录</button>
+    </view>
+    <view class='content'>One Room一间房</view>
+  </view>
+</view>
+

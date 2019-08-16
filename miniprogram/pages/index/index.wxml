@@ -26,7 +26,7 @@
 <!-- </view> -->
 
 <view>
-  <view class="list-item" wx:if="{{if_first_login == 0}}">
+  <!-- <view class="list-item" wx:if="{{if_first_login == 0}}">
     <block wx:for="{{userList}}">
       <navigator url='../user/user?id={{item._openid}}'>
         <van-card 
@@ -45,8 +45,8 @@
       bindgetuserinfo="getUserInfo">授权登录</button>
     </view>
     <view class='content'>One Room一间房</view>
-  </view>
-  <view wx:if="{{if_first_login == 1}}">
+  </view> -->
+  <view>
   <!-- <button>one room</button> -->
     <view wx:for="{{list}}" id="{{item._id}}" class="item-container" bindtap="toDetail">
       <image lazy-lazy-load="true" mode='aspectFit' class="image" src="{{item.image}}"></image>

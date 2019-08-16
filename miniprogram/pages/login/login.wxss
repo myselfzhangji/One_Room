@@ -1,0 +1,18 @@
+/* miniprogram/pages/login/login.wxss */
+.floatBtn{
+  display: flex;
+  padding-top: 200px;
+  align-items: center;
+  vertical-align: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.content{
+  flex: 2;
+  display: flex;
+  align-items: center;
+  vertical-align: center;
+  justify-content: center;
+  flex-direction: row;
+}

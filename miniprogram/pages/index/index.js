@@ -7,8 +7,7 @@ const userInfo = db.collection('userInfo')
 Page({
   data: {
     list:[],             //商品信息
-    if_first_login: 0,
-    userList: [],        //用户信息
+    //userList: [],        //用户信息
   },
 
  /* 体检到心愿单 */
@@ -32,6 +31,7 @@ Page({
    * 解决如果远程数据库删除一个记录后，如果不同步的话，本地数据记录仍然存在报错的问题
    */
   onShow: function () {
+    wx.showTabBar()    //显示app.json定义的tarBar
     //console.log('12345')
     wx.cloud.callFunction({
       name: 'login',
@@ -54,9 +54,7 @@ Page({
       }
     })
 
-    if (this.data.if_first_login == 1) {
-      this.getMall(true)
-    }
+    this.getMall(true)
   },
 
   //事件处理函数
@@ -94,14 +92,14 @@ Page({
     })
   },
 
-  onLoad: function () {
-    userInfo.get().then(res => {
-      //console.log('who a u',res.data)
-      this.setData({
-        userList: res.data
-      })
-    })
-  },
+  // onLoad: function () {
+  //   userInfo.get().then(res => {
+  //     //console.log('who a u',res.data)
+  //     this.setData({
+  //       userList: res.data
+  //     })
+  //   })
+  // },
 
   getUserInfo: function (result) {
     wx.switchTab({
