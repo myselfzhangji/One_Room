@@ -250,14 +250,18 @@ Page({
         // const filePath = res.tempFilePaths[0]
         // const tempFile = filePath.split('.')
         // const cloudPath = 'room-' + tempFile[tempFile.length - 2] + '.jpg'
+        let randString = Math.floor(Math.random() * 10000000 +Math.random() * 1000000 +Math.random() * 100000).toString();
         this.setData({
           filepath: res.tempFilePaths[0],
         })
         console.log('filepath',this.data.filepath)
+        //console.log('randString', randString)
         const tempFile = res.tempFilePaths[0].split('.')
         this.setData({
-          cloudpath: 'room-' + tempFile[tempFile.length - 2] + '.jpg',
+          //cloudpath: 'room-' + tempFile[tempFile.length - 2] + '.jpg',
+          cloudpath: 'room-' + randString + '.jpg',
         })
+        console.log('cloud path', this.data.cloudpath)
       },
       fail: err => {
         console.error(err)
@@ -266,7 +270,7 @@ Page({
   },
 
   release(e){
-    //console.log('I am here', e)
+    console.log('I am here', e)
     wx.cloud.uploadFile({
       cloudPath:this.data.cloudpath,  // 上传至云端的路径
       filePath:this.data.filepath,   // 小程序临时文件路径
@@ -280,10 +284,13 @@ Page({
             inDate: this.data.date,
           },
           success: res2 => {
-            //console.log(res2)
+            console.log(res2)
             wx.showToast({
               title: '新增成功',
             })
+          },
+          fail: err=> {
+            console.error('error',err)
           }
         })
       }
