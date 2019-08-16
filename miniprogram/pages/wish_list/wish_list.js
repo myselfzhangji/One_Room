@@ -13,6 +13,7 @@ Page({
 
   //获取全局的carts变量值
   onShow: function () {
+    wx.showTabBar()
     console.log('carts1', app.globalData.carts)
     this.setData({
       list: app.globalData.carts

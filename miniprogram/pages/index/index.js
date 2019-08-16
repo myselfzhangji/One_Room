@@ -104,6 +104,9 @@ Page({
   },
 
   getUserInfo: function (result) {
+    wx.switchTab({
+      url: '../wish_list/wish_list',
+    })
     //console.log('hello', result)
     this.setData({
       if_first_login:1

@@ -57,6 +57,10 @@ onLaunch: function () {
     }
   },
 
+  onShow(){
+    wx.hideTabBar();
+  },
+
   /* 全局变量
    * 其他所有模块都能使用
    */
