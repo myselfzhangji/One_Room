@@ -58,7 +58,7 @@ onLaunch: function () {
   },
 
   onShow(){
-    wx.hideTabBar();
+    //wx.hideTabBar();
   },
 
   /* 全局变量

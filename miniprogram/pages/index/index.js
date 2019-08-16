@@ -31,7 +31,7 @@ Page({
    * 解决如果远程数据库删除一个记录后，如果不同步的话，本地数据记录仍然存在报错的问题
    */
   onShow: function () {
-    wx.showTabBar()    //显示app.json定义的tarBar
+    //wx.showTabBar()    //显示app.json定义的tarBar
     //console.log('12345')
     wx.cloud.callFunction({
       name: 'login',
