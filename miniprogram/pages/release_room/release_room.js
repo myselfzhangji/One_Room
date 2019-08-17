@@ -261,30 +261,54 @@ Page({
         that.setData({
           files: that.data.files.concat(res.tempFilePaths)
         })
+        const tempFilePaths = res.tempFilePaths
+        var currentTime = util.formatTime(new Date());
+        var randString = new Array();
+        this.setData({
+          filepath: res.tempFilePaths,
+        })
+        //console.log('filepath', this.data.filepath)
+        for (var i = 0; i < tempFilePaths.length; i++){
+          randString[i] = currentTime.toString();
+          randString[i] += Math.floor(Math.random() * 10000000).toString();
+          randString[i] += Math.floor(Math.random() * 1000000).toString();
+          randString[i] += Math.floor(Math.random() * 100000).toString();
+          randString[i] = 'room-' + randString[i] + '.jpg'
+          //console.log('randString[i]', randString[i])
+        }
+        this.setData({
+          cloudpath: randString,
+        })
+        console.log('cloudpath', this.data.cloudpath)
+
+
+
+
+        //console.log('filepath', res.tempFilePaths)
 
         // const tempFilePaths = res.tempFilePaths
         // const filePath = res.tempFilePaths[0]
         // const tempFile = filePath.split('.')
         // const cloudPath = 'room-' + tempFile[tempFile.length - 2] + '.jpg'
 
-        var currentTime = util.formatTime(new Date());
-        //console.log('currentTime', currentTime)
+        // var currentTime = util.formatTime(new Date());
+        // //console.log('currentTime', currentTime)
 
-        let randString = currentTime.toString();
-        randString += Math.floor(Math.random() * 10000000).toString();
-        randString += Math.floor(Math.random() * 1000000).toString();
-        randString += Math.floor(Math.random() * 100000).toString();
-        this.setData({
-          filepath: res.tempFilePaths[0],
-        })
-        console.log('filepath',this.data.filepath)
-        //console.log('randString', randString)
-        const tempFile = res.tempFilePaths[0].split('.')
-        this.setData({
-          //cloudpath: 'room-' + tempFile[tempFile.length - 2] + '.jpg',
-          cloudpath: 'room-' + randString + '.jpg',
-        })
-        console.log('cloud path', this.data.cloudpath)
+        // let randString = currentTime.toString();
+        // randString += Math.floor(Math.random() * 10000000).toString();
+        // randString += Math.floor(Math.random() * 1000000).toString();
+        // randString += Math.floor(Math.random() * 100000).toString();
+        // this.setData({
+        //   filepath: res.tempFilePaths[0],
+        // })
+        // console.log('filepath',this.data.filepath)
+        // //console.log('randString', randString)
+        // const tempFile = res.tempFilePaths[0].split('.')
+        // this.setData({
+        //   //cloudpath: 'room-' + tempFile[tempFile.length - 2] + '.jpg',
+        //   cloudpath: 'room-' + randString + '.jpg',
+        // })
+        // console.log('cloud path', this.data.cloudpath)
       },
       fail: err => {
         console.error(err)
@@ -293,30 +317,31 @@ Page({
   },
 
   release(e){
-    console.log('I am here', e)
-    wx.cloud.uploadFile({
-      cloudPath:this.data.cloudpath,  // 上传至云端的路径
-      filePath:this.data.filepath,   // 小程序临时文件路径
-      success: res => {
-        console.log('I am here',res)
-        db.collection('emall').add({
-          data: {
-            title: this.data.location + '出租',
-            price: this.data.price + '/月',
-            image: res.fileID,
-            inDate: this.data.date,
-          },
-          success: res2 => {
-            console.log(res2)
-            wx.showToast({
-              title: '新增成功',
-            })
-          },
-          fail: err=> {
-            console.error('error',err)
-          }
-        })
-      }
+    //console.log('I am here', e)
+    for (var i = 0; i < this.data.filepath.length; i++) {
+      wx.cloud.uploadFile({
+        cloudPath: this.data.cloudpath[i],  // 上传至云端的路径
+        filePath: this.data.filepath[i],   // 小程序临时文件路径
+        success: res => {
+          console.log('I am here', res)
+          db.collection('emall').add({
+            data: {
+              title: this.data.location + '出租',
+              price: this.data.price + '/月',
+              image: res.fileID,
+              inDate: this.data.date,
+            },
+            success: res2 => {
+              //console.log(res2)
+              wx.showToast({
+                title: '新增成功',
+              })
+            },
+            fail: err => {
+              console.error('error', err)
+            }
+          })
+        }
         // for (var i = 0; i < tempFilePaths.length; i++) {
         //   const tempFile = tempFilePaths[i].split('.')
         //   const tempcloudPath = 'room-' + tempFile[tempFile.length - 2] + '.jpg'
@@ -342,7 +367,8 @@ Page({
         //     fail: console.error
         //   })
         // }
-    })
+      })
+    }
   },
 
   getMall(e) {
