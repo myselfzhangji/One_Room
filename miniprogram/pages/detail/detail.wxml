@@ -7,7 +7,7 @@
 </view> -->
 
 <view>
-<view class="title">{{detailInfo.title}}￥{{detailInfo.price}}</view>
+<view class="content">{{detailInfo.title}}￥{{detailInfo.price}}</view>
   <view wx:for="{{detailInfo.pictureCnt}}" id="{{detailInfo._id}}" class="item-container" bindtap="toDetail">
     <image lazy-lazy-load="true" style="width:100%;" mode='aspectFit' class="image" src="{{detailInfo.image}}"></image>
     <view class='content'>
