@@ -1,52 +1,27 @@
 /* pages/release_room/show_release.wxss */
-.item-container {
+page,
+.page,
+.page__bd{
+    height: 100%;
+}
+.page__bd{
+    padding-bottom: 0;
+}
+.weui-tab__content{
+    padding-top: 60px;
+    text-align: center;
+}
+
+.motto{
+  margin-top: 150px;
+  text-align: center
+}
+
+/* .content用来设置view组件居中显示*/
+.content{
   display: flex;
-}
-
-.image {
-  width: 300rpx;
-  height: 150rpx;
-  flex: 1;
-}
-
-.content {
-  flex: 2;
-}
-
-.title {
-  font-weight: bold;
-}
-
-.action {
-  flex: 1;
-}
-
-.tag {
-  padding: 0 5rpx;
-  background: #EA5149;
-  border-radius: 20%;
-  margin: 5rpx;
-  color: white;
-  font-size: 20rpx;
-}
-
-.wish{
-  padding: 5rpx;
-  background: #EA5149;
-  border-radius: 50%;
-  color:white;
-  width: 50rpx;
-}
-
-.selects{
-  margin-left: 5%;
-  margin-right: 5%;
-}
-.selects>.select{
-  margin: 10rpx;
-  float: left;
-  width: 195rpx;
-}
-.selects>.select>.btn{
- background-color: #FFFFFF;
+  align-items: center;
+  vertical-align: center;
+  justify-content: center;
+  flex-direction: row;
 }
