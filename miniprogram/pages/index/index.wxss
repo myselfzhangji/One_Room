@@ -31,7 +31,7 @@
   background: #EA5149;
   border-radius: 50%;
   color:white;
-  width: 50rpx;
+  width: 250rpx;
 }
 
 .thumb-class{
