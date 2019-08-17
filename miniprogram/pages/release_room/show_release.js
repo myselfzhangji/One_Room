@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    hint: '',
   },
 
   /**
@@ -71,6 +71,20 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: 'One Room 一间房'
+    }
+    // db.collection('emall').get({
+    //   success: res => {
+    //     console.log('minminmin', res)
+    //     console.log('hint', res.data[0].title)
+    //     this.setData({
+    //       hint: res.data[0].title
+    //     })
+    //     return {
+    //       title: this.data.hint
+    //     }
+    //   }
+    // })
   }
 })

@@ -92,14 +92,15 @@ Page({
     })
   },
 
-  // onLoad: function () {
-  //   userInfo.get().then(res => {
-  //     //console.log('who a u',res.data)
-  //     this.setData({
-  //       userList: res.data
-  //     })
-  //   })
-  // },
+  onLoad: function () {
+    // wx.showShareMenu()
+    // userInfo.get().then(res => {
+    //   //console.log('who a u',res.data)
+    //   this.setData({
+    //     userList: res.data
+    //   })
+    // })
+  },
 
   getUserInfo: function (result) {
     wx.switchTab({
