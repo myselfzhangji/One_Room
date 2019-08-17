@@ -99,13 +99,17 @@
         <view class="weui-cell__bd">
           <view class="weui-uploader">
             <view class="weui-uploader__hd">
-            <block wx:for="{{files}}" wx:key="*this">
-              <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                  <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
-              </view>
-            </block>
               <view class="weui-uploader__title">房间照片</view>
-              <view class="weui-uploader__info">{{files.length}}</view>
+              <!-- <view class="weui-uploader__info">{{files.length}}</view> -->
+            </view>
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__files" id="uploaderFiles">
+                <block wx:for="{{files}}" wx:key="*this">
+                  <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                  </view>
+                </block>
+              </view>
             </view>
 
             <view class="weui-uploader__input-box">
