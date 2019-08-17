@@ -1,6 +1,7 @@
 // pages/release/release.js
 const app = getApp()
 const db = wx.cloud.database()
+var util = require('../../utils/util.js')
 
 Page({
 
@@ -81,6 +82,7 @@ Page({
     filepath:'',
     cloudpath:'',
     date: '2019-08-15',
+    files: [],
   },
 
   bindDateChange: function (e) {
@@ -240,17 +242,38 @@ Page({
 
   },
 
+  previewImage: function (e) {
+    wx.previewImage({
+      current: e.currentTarget.id, // 当前显示图片的http链接
+      urls: this.data.files // 需要预览的图片http链接列表
+    })
+  },
+
   addMyRoomInfo() {
+    var that = this;
     wx.chooseImage({
       count: 4,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: res => {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        //用于在本地显示
+        that.setData({
+          files: that.data.files.concat(res.tempFilePaths)
+        })
+
         // const tempFilePaths = res.tempFilePaths
         // const filePath = res.tempFilePaths[0]
         // const tempFile = filePath.split('.')
         // const cloudPath = 'room-' + tempFile[tempFile.length - 2] + '.jpg'
-        let randString = Math.floor(Math.random() * 10000000 +Math.random() * 1000000 +Math.random() * 100000).toString();
+
+        var currentTime = util.formatTime(new Date());
+        //console.log('currentTime', currentTime)
+
+        let randString = currentTime.toString();
+        randString += Math.floor(Math.random() * 10000000).toString();
+        randString += Math.floor(Math.random() * 1000000).toString();
+        randString += Math.floor(Math.random() * 100000).toString();
         this.setData({
           filepath: res.tempFilePaths[0],
         })
