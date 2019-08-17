@@ -330,6 +330,7 @@ Page({
               price: this.data.price + '/月',
               image: res.fileID,
               inDate: this.data.date,
+              pictureCnt : i,
             },
             success: res2 => {
               //console.log(res2)

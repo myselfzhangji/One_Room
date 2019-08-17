@@ -1,5 +1,19 @@
 <!--pages/detail/detail.wxml-->
+<!-- <view>
+<view>详情页面</view>
+<view>{{detailInfo._id}}</view>
+<view>{{detailInfo.title}}</view>
+<view>￥{{detailInfo.price}}</view>
+</view> -->
+
 <view>
-<text>详情页面</text>
-<text>{{id}}</text>
+<view class="title">{{detailInfo.title}}￥{{detailInfo.price}}</view>
+  <view wx:for="{{detailInfo.pictureCnt}}" id="{{detailInfo._id}}" class="item-container" bindtap="toDetail">
+    <image lazy-lazy-load="true" style="width:100%;" mode='aspectFit' class="image" src="{{detailInfo.image}}"></image>
+    <view class='content'>
+    <view>
+    <text class="tag" wx:for="{{itedetailInfom.tags}}">{{detailInfo}}</text>
+    </view>
+    </view>
+  </view>
 </view>

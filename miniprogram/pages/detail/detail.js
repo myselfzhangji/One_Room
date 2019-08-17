@@ -1,20 +1,34 @@
 // pages/detail/detail.js
+const app = getApp()
+const db = wx.cloud.database()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    id: ''
+    id: '',
+    detailInfo:{},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    //console.log(options)
     this.setData({
       id: options.id
+    })
+    const emallInfo = db.collection('emall').doc(options.id)
+    emallInfo.get({
+      success:res => {
+        console.log('is get1', res.data)
+        this.setData({
+          detailInfo:res.data
+        })
+        console.log('is get', this.data.detailInfo)    
+      }
     })
   },
 
