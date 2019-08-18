@@ -17,6 +17,9 @@
                       <view>
                         <view class='index-exam-inlets'>
                           <view class="index-exam-inlets-mk">
+                          <button id='{{showcomment[index]._id}}' class="mini-btn .col-hg-2" plain="true" catchtap="deletmsg">
+                          删除
+                          </button>
                           <view class=".col-hg-2">
                           <image src='{{showcomment[index].avatar}}' class='headImg'></image>
                           </view>

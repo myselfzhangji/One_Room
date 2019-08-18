@@ -40,5 +40,33 @@ Page({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
+  },
+
+  deletmsg:function(e){
+    console.log('delete msg', e.currentTarget.id)
+    commentInfo.doc(e.currentTarget.id).remove({
+      success: res => {
+        wx.showToast({
+          title: '删除成功',
+        })
+      },
+      fail: err =>{
+        wx.showToast({
+          title: '删除失败',
+        })
+      }
+    })
+
+    /* 删除完成之后，重新加载一次新的消息列表 */
+    let userOpenId = wx.getStorageSync('openid')
+    //console.log('userOpenId', userOpenId)
+    commentInfo.where({
+      _openid: userOpenId
+    }).get().then(res => {
+      console.log('where', res)
+      this.setData({
+        showcomment: res.data
+      })
+    });
   }
 });
