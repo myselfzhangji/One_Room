@@ -10,7 +10,7 @@ Page({
     //userList: [],        //用户信息
   },
 
- /* 体检到心愿单 */
+ /* 添加到心愿单 */
   addCart(e){
     console.log('jdhjfhjkhjk',e)
     const {item} = e.currentTarget.dataset
@@ -25,6 +25,8 @@ Page({
       console.log('carts', app.globalData.carts)
     }
     wx.setStorageSync('carts', app.globalData.carts)
+    const ddd = wx.getStorageSync('carts')
+    console.log('ddd', ddd)
   },
 
   /* 先将本地数据库和远程数据库进行同步

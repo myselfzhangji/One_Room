@@ -20,16 +20,20 @@ Page({
     this.setData({
       id: options.id
     })
-    const emallInfo = db.collection('emall').doc(options.id)
-    emallInfo.get({
-      success:res => {
-        console.log('is get1', res.data)
-        this.setData({
-          detailInfo:res.data
-        })
-        console.log('is get', this.data.detailInfo)    
-      }
+    const carts = wx.getStorageSync('carts')
+    this.setData({
+      detailInfo: carts
     })
+    // const emallInfo = db.collection('emall').doc(options.id)
+    // emallInfo.get({
+    //   success:res => {
+    //     console.log('is get1', res.data)
+    //     this.setData({
+    //       detailInfo:res.data
+    //     })
+    //     console.log('is get', this.data.detailInfo)    
+    //   }
+    // })
   },
 
   /**
