@@ -10,6 +10,7 @@ Page({
   data: {
     if_first_login: 0,
     userList: [],        //用户信息
+    openId:"",
   },
 
   getUserInfo: function (result) {
@@ -26,6 +27,11 @@ Page({
       name: 'getOpenid',
       complete: res => {
         //console.log('erfd', res)
+        this.setData({
+          openId:res.result.openId
+        })
+        //console.log('openid', this.data.openId)
+        wx.setStorageSync('openid', this.data.openId)
         userInfo.where({
           _openid: res.result.openId
         })

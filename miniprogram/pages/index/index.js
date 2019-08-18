@@ -36,7 +36,7 @@ Page({
     wx.cloud.callFunction({
       name: 'login',
       success: res => {
-        //console.log('1234', res)
+        console.log('1234', res)
         //e.detail.userInfo.openid = res.result.openid
         //需要openid
         //app.globalData.userInfo = e.detail.userInfo

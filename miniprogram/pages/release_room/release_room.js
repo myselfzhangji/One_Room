@@ -196,16 +196,24 @@ Page({
     //   }
     // })
   },
-  
+
   tabClick: function (e) {
     /* id=1，表示切换到了我的发布页面，查找我的发布 */
+    //console.log('myopoenid', myopenid)
     if (e.currentTarget.id == 1){
+      const myopenid = wx.getStorageSync('openid')
       db.collection('emall').get({
       success: res => {
-        console.log('kdjfkdjfjfl', res)
-        this.setData({
-          myReleaseRoom: res.data
-        })
+        //console.log('kdjfkdjfjfl', res.data)
+        for (var i = 0; i < res.data.length; i++){
+          if (myopenid != res.data[i]._openid){
+            continue
+          }
+
+          this.setData({
+            myReleaseRoom: res.data
+          })
+        }
       }
     })
     }
