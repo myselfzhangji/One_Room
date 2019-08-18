@@ -1,7 +1,9 @@
 // pages/detail/detail.js
 const app = getApp()
 const db = wx.cloud.database()
+const commentInfo = db.collection('comments')
 var util = require('../../utils/util.js')
+var pictureId = ''
 
 Page({
 
@@ -16,13 +18,16 @@ Page({
     commentdata: {
       comment:[],
     },
+    showcomment:{},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //console.log(options)
+    //console.log('option',options)
+    pictureId = options.id
+    //console.log('pictureId', pictureId)
     this.setData({
       id: options.id
     })
@@ -33,12 +38,31 @@ Page({
     const emallInfo = db.collection('emall').doc(options.id)
     emallInfo.get({
       success:res => {
-        console.log('is get1', res.data)
+        //console.log('is get1', res.data)
         this.setData({
           detailInfo:res.data
         })
-        console.log('is get', this.data.detailInfo)    
+        //console.log('is get', this.data.detailInfo)    
       }
+    })
+
+    // const comm = db.collection('comments')
+    // commentInfo.doc(options.id).get({
+    //   success: res => {
+    //     console.log('is get1', res.data)
+    //     this.setData({
+    //       showcomment: res.data
+    //     })
+    //     //console.log('is get', this.data.detailInfo)    
+    //   }
+    // })
+    commentInfo.where({
+      picid: options.id
+    }).get().then(res => {
+      console.log('where', res.data)
+      this.setData({
+        showcomment: res.data
+      })
     })
   },
 
@@ -99,6 +123,7 @@ Page({
   },
 
   confirm: function () {
+    //console.log('pictureId', pictureId)
     let userOpenId = wx.getStorageSync('openid')
     //console.log('userOpenId', userOpenId)
 
@@ -106,19 +131,19 @@ Page({
     let d = new Date();
     var data = {};
     let arr =  this.data.commentdata.comment;
+
     if (this.data.commentTxt) {
       data = {
         comment: this.data.commentTxt,
         username: wx.getStorageSync('username'),
-        time: d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(),
+        date: d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(),
+        time: d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds(),
         userId: userOpenId,
         //id: this.data.itemId,
         avatar: wx.getStorageSync('avatar')
       }
       arr.push(data)
       console.log('asdf', arr)
-      //return
-
     } else
       wx.showToast({
         title: '请填写内容',
@@ -147,12 +172,17 @@ Page({
       db.collection('comments').add({
         data:{
           commentinfo: this.data.commentTxt,
+          picid: pictureId,
+          username: wx.getStorageSync('username'),
+          avatar: wx.getStorageSync('avatar'),
+          date: data.date,
+          time: data.time,
         },
         success: res => {
           console.log('comment新增成功')
         },
         fail: e => {
-          console.log('comment新增失败', e)
+          console.log('comment新增失败')
         }
       })
 
