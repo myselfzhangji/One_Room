@@ -6,7 +6,7 @@
 <view>￥{{detailInfo.price}}</view>
 </view> -->
 
-<view>
+<!-- <view>
 <view class="content">{{detailInfo.title}}￥{{detailInfo.price}}</view>
   <view wx:for="{{detailInfo.pictureCnt}}" id="{{detailInfo._id}}" class="item-container" bindtap="toDetail">
     <image lazy-lazy-load="true" style="width:100%;" mode='aspectFit' class="image" src="{{detailInfo.image}}"></image>
@@ -16,4 +16,35 @@
     </view>
     </view>
   </view>
+</view> -->
+
+<view class='flexDownC content'>
+  <view class='content flexDownC w100'>
+    <view class='userInfo flexRowL w100'>
+      <view class="content">{{detailInfo.title}}￥{{detailInfo.price}}</view>
+      <view wx:for="{{detailInfo.pictureCnt}}" class='user flexC '>
+        <image src='{{detailInfo.image}}' class='userImg'></image>
+      </view>
+    </view>
+  </view>
+  
+  <view class='garyLine'></view>
+  <view class='comments flexDownC'>
+    <view wx:if='{{data.comment.length > 0}}' class='com'>
+      <view wx:for='{{data.comment}}' wx:key="{{index}}" class='comItem flexDownC'>
+        <view class='userInfo flexRowL'>
+          <view class='user flexC'>
+            <image src='{{item.avatar}}' class='userImg'></image> {{item.username}}</view>
+        </view>
+      </view>
+      
+    </view>
+    <view wx:else class='noComment'>
+      暂无评论...
+    </view>
+  </view>
+</view>
+
+<view class='bottomInput flexC' >
+  <input class='inputB' placeholder='留言' placeholder-style='color:#ccc' maxlength='120' value='{{commentTxt}}' confirm-type='send' bindinput='inputHandler' bindconfirm='confirm'></input>
 </view>

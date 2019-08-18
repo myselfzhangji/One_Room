@@ -13,20 +13,23 @@ Page({
     openId:"",
   },
 
+  /*获取用户信息，微信昵称，微信头像等等*/
   getUserInfo: function (result) {
     wx.switchTab({
       url: '../index/index',
     })
-    //console.log('hello', result)
+    console.log('hello', result)
     this.setData({
       if_first_login: 1
     })
     wx.setStorageSync('if_first_login', this.data.if_first_login)
+    wx.setStorageSync('avatar', result.detail.userInfo.avatarUrl)
+    wx.setStorageSync('username', result.detail.userInfo.nickName)
     //console.log('if_first_login=',this.data.if_first_login)
     wx.cloud.callFunction({
       name: 'getOpenid',
       complete: res => {
-        //console.log('erfd', res)
+        console.log('erfd', res)
         this.setData({
           openId:res.result.openId
         })
