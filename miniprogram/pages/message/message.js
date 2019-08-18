@@ -1,51 +1,44 @@
 // pages/message/message.js
 const app = getApp()
 const db = wx.cloud.database()
-const msg = db.collection('message')
+const commentInfo = db.collection('comments')
+
+var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 
 Page({
   data: {
-    msgData: []
+    tabs: ["发出", "收到"],
+    activeIndex: 0,
+    sliderOffset: 0,
+    sliderLeft: 0,
+    showcomment: {},
   },
-  changeInputValue(ev) {
-    this.setData({
-      inputVal: ev.detail.value
-    })
-  },
-  //删除留言
-  DelMsg(ev) {
-    var n = ev.target.dataset.index;
-
-    var list = this.data.msgData;
-    list.splice(n, 1);
-
-    this.setData({
-      msgData: list
-
-    });
-  },
-  //添加留言
-  addMsg() {
-    var list = this.data.msgData;
-    console.log('hdhjfhh',list)
-    list.push({
-      msg: this.data.inputVal
-    });
-    //更新
-    this.setData({
-      msgData: list,
-      inputVal: ''
-    });
-    msg.add({
-      data: {
-        msg: list
-      },
-      success: res2 => {
-        //console.log(res2)
-        wx.showToast({
-          title: '新增成功',
-        })
+  onLoad: function () {
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+        });
       }
-    })
+    });
+
+    let userOpenId = wx.getStorageSync('openid')
+    //console.log('userOpenId', userOpenId)
+    commentInfo.where({
+      _openid: userOpenId
+    }).get().then(res => {
+      console.log('where', res)
+      this.setData({
+        showcomment: res.data
+      })
+    });
   },
-})
+  tabClick: function (e) {
+    this.setData({
+      sliderOffset: e.currentTarget.offsetLeft,
+      activeIndex: e.currentTarget.id
+    });
+  }
+});

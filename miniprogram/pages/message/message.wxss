@@ -1,44 +1,143 @@
 /* pages/message/message.wxss */
 
-.msg-box {
-  padding: 20px;
+page,
+.page,
+.page__bd{
+    height: 100%;
+}
+.page__bd{
+    padding-bottom: 0;
+}
+.weui-tab__content{
+    padding-top: 60px;
+    text-align: center;
 }
 
-.send-box {
+.motto{
+  margin-top: 150px;
+  text-align: center
+}
+
+/* .content用来设置view组件居中显示*/
+.content{
+  align-items: flex-start;
+  vertical-align: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.noComment{
+  font-size: 28rpx;
+  margin-top: 30rpx;
+  color: #ccc;
+}
+
+.comItem, .comments, .com{
+  width: 100%;
+}
+.userImg{
+  margin-right: 10rpx;
+}
+.headImg{
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 40rpx;
+}
+.nickSize{
+  height: 20rpx;
+  width: 20rpx;
+}
+
+.comItem{
+  padding:10rpx 20rpx;
+  margin-top: 30rpx;
+  margin-bottom: 20rpx;
+  border-bottom: 1px solid #f7f7f7;
+}
+.navBtn{
+  width: 80%;
+  height: 80rpx;
+  color: #fff;
+  background: #ea9518;
+  line-height: 80rpx;
+  margin-top: 60rpx;
+}
+
+.comItem:last-child{
+  border: none
+}
+.time{
+  width: 100%;
+  font-size: 24rpx;
+  color: #ccc;
+  margin-right: 50rpx;
+}
+
+.bottomInput{
+  width: 100%;
+  height: 100rpx;
+}
+
+
+.inputB{
+  width: 95%;
+  height: 80rpx;
+  line-height: 80rpx;
+  border: 1px solid #f4f4f4;
+  border-radius: 10rpx;
+  background: #f9f9f9;
+}
+
+.small{
+  top: 0rpx;
+  font-size: 22rpx;
+  color: #999;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  border-radius: 10rpx;
+}
+
+.input{
+  left:0rpx;
   display: flex;
 }
 
-.input {
-  border: 1px solid #b0c4de;
-  padding: 5px;
+.index-exam-inlets-mk{
+  position: relative;
+  height: 80rpx;
+  border-right: 0px solid #eeeeeb;
+  font-size: 30rpx;
+  color:#666;
 }
 
-.msg-info {
-  display: block;
-  margin: 10px 0 0 0;
-  color: #390;
+.index-exam-inlets{
+  margin-bottom: 0rpx;
+  background: #fff;
 }
 
-.place-input {
-  color: salmon;
-}
+.col-hg-1, .col-hg-2, .col-hg-3, .col-hg-4, .col-hg-5, .col-hg-6, .col-hg-7, .col-hg-8, .col-hg-9, .col-hg-10, .col-hg-11, .col-hg-12 { float: left; box-sizing: border-box;}
 
-.list-view {
-  margin: 20px 0 0 0;
-}
+.col-hg-12 { width: 100%; }
 
-.item {
-  overflow: hidden;
-  border-bottom: 1px dashed #87ceff;
-  height: 30px;
-  line-height: 30px;
-}
+.col-hg-11 { width: 91.6667%; }
 
-.text1 {
-  float: left;
-}
+.col-hg-10 { width: 83.3333%; }
 
-.close-btn {
-  float: right;
-  margin: 5px 5px 0 0;
-}
+.col-hg-9 { width: 75%; }
+
+.col-hg-8 { width: 66.6667%;}
+
+.col-hg-7 { width: 40%; }
+
+.col-hg-6 { width: 50%; }
+
+.col-hg-5 { width: 41.6667%; }
+
+.col-hg-4 { width: 33.3333%; }
+
+.col-hg-3 { width: 25%; }
+
+.col-hg-2 { width: 16.6667%; }
+
+.col-hg-1 { width: 8.33333%; }

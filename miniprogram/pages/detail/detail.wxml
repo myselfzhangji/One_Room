@@ -34,9 +34,11 @@
       <view wx:for='{{showcomment}}' wx:key="{{index}}" class='comItem flexDownC'>
           <view class='index-exam-inlets'>
             <view class="index-exam-inlets-mk">
-            <view class="small .col-hg-3">{{showcomment[index].username}}</view>
-            <view class="small .col-hg-3">{{showcomment[index].date}}</view>
+            <view class="small .col-hg-2">
             <image src='{{showcomment[index].avatar}}' class='headImg'></image>
+            </view>
+            <view class="small .col-hg-3">{{showcomment[index].username}} {{showcomment[index].date}}</view>
+            <!-- <view class="small .col-hg-3">{{showcomment[index].date}}</view> -->
             </view>
             <view>
             {{showcomment[index].commentinfo}}
