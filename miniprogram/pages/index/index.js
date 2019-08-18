@@ -151,6 +151,6 @@ Page({
     wx.navigateTo({
       url: '/pages/detail/detail?id='+id,
     })
-    console.log(e)
+    console.log('step from index',e)
   }
 })

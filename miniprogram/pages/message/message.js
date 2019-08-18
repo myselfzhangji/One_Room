@@ -13,6 +13,19 @@ Page({
     sliderLeft: 0,
     showcomment: {},
   },
+
+  onShow: function() {
+    let userOpenId = wx.getStorageSync('openid')
+    //console.log('userOpenId', userOpenId)
+    commentInfo.where({
+      _openid: userOpenId
+    }).get().then(res => {
+      console.log('where', res)
+      this.setData({
+        showcomment: res.data
+      })
+    });
+  },
   onLoad: function () {
     var that = this;
     wx.getSystemInfo({
@@ -35,6 +48,7 @@ Page({
       })
     });
   },
+
   tabClick: function (e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
@@ -68,5 +82,14 @@ Page({
         showcomment: res.data
       })
     });
+  },
+
+  toRoomDetail:function(e){
+    const id = e.currentTarget.id
+    console.log('picid', id)
+    wx.navigateTo({
+      url: '/pages/detail/detail?id=' + id,
+    })
+    console.log(e)
   }
 });

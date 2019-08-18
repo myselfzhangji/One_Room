@@ -15,7 +15,7 @@
                   <view wx:if='{{showcomment.length > 0}}' class='com'>
                     <view wx:for='{{showcomment}}' wx:key="{{index}}" class='comItem flexDownC'>
                       <view>
-                        <view class='index-exam-inlets'>
+                        <view id='{{showcomment[index].picid}}' class='index-exam-inlets' bindtap="toRoomDetail">
                           <view class="index-exam-inlets-mk">
                           <button id='{{showcomment[index]._id}}' class="mini-btn .col-hg-2" plain="true" catchtap="deletmsg">
                           删除

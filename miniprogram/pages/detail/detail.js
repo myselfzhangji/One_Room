@@ -21,6 +21,19 @@ Page({
     showcomment:{},
   },
 
+  onShow: function (options){
+    // commentInfo.where({
+    //   picid: options.id
+    // }).get().then(res => {
+    //   console.log('where', res.data.length)
+    //   this.setData({
+    //     showcomment: res.data
+    //   })
+    //   console.log('length', this.data.showcomment)
+    //   //wx.setStorageSync('showComment', this.data.showcomment)
+    // })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -186,6 +199,17 @@ Page({
         fail: e => {
           console.log('comment新增失败')
         }
+      })
+
+      commentInfo.where({
+        picid: pictureId
+      }).get().then(res => {
+        console.log('where', res.data.length)
+        this.setData({
+          showcomment: res.data
+        })
+        console.log('length', this.data.showcomment)
+        //wx.setStorageSync('showComment', this.data.showcomment)
       })
 
       // wx.cloud.callFunction({
