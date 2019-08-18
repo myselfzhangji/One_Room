@@ -2,6 +2,7 @@
 const app = getApp()
 const db = wx.cloud.database()
 var util = require('../../utils/util.js')
+var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 
 Page({
 
@@ -9,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabs: ["发布房源", "查看我的发布"],
+    tabs: ["发布房源", "我的发布"],
     activeIndex: 1,
     sliderOffset: 0,
     sliderLeft: 0,
@@ -176,15 +177,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    // var that = this;
-    // wx.getSystemInfo({
-    //   success: function (res) {
-    //     that.setData({
-    //       sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 4,
-    //       sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
-    //     });
-    //   }
-    // });
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 4,
+          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+        });
+      }
+    });
   },
   tabClick: function (e) {
     this.setData({
