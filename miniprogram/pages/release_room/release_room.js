@@ -11,10 +11,10 @@ Page({
    */
   data: {
     tabs: ["发布房源", "我的发布"],
-    activeIndex: 1,
+    activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
-    list: [],
+    myReleaseRoom: [],
     role: ['业主', '转租', '室友', '公寓'],
     clickRoleId: -1,
     rentMode: ['整租', '单间出租', '床位出租'],
@@ -186,8 +186,29 @@ Page({
         });
       }
     });
+
+    // db.collection('emall').get({
+    //   success: res => {
+    //     console.log('kdjfkdjfjfl', res)
+    //     this.setData({
+    //       myReleaseRoom: res.data
+    //     })
+    //   }
+    // })
   },
+  
   tabClick: function (e) {
+    /* id=1，表示切换到了我的发布页面，查找我的发布 */
+    if (e.currentTarget.id == 1){
+      db.collection('emall').get({
+      success: res => {
+        console.log('kdjfkdjfjfl', res)
+        this.setData({
+          myReleaseRoom: res.data
+        })
+      }
+    })
+    }
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
@@ -281,9 +302,6 @@ Page({
           cloudpath: randString,
         })
         console.log('cloudpath', this.data.cloudpath)
-
-
-
 
         //console.log('filepath', res.tempFilePaths)
 
