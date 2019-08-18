@@ -30,11 +30,16 @@
   
   <view class='garyLine'></view>
   <view class='comments flexDownC'>
-    <view wx:if='{{data.comment.length > 0}}' class='com'>
-      <view wx:for='{{data.comment}}' wx:key="{{index}}" class='comItem flexDownC'>
-        <view class='userInfo flexRowL'>
+    <view wx:if='{{showcomment.length > 0}}' class='com'>
+      <view wx:for='{{showcomment}}' wx:key="{{index}}" class='comItem flexDownC'>
+        <view class='userInfo flexRowL' >
           <view class='user flexC'>
-            <image src='{{item.avatar}}' class='userImg'></image> {{item.username}}</view>
+          <block>
+            <image src='{{showcomment[index].avatar}}' class='headImg'></image>
+          </block>
+            {{showcomment[index].commentinfo}}
+            {{showcomment[index].username}}
+            </view>
         </view>
       </view>
       

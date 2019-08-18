@@ -38,6 +38,11 @@ page,
 .userImg{
   margin-right: 10rpx;
 }
+.headImg{
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 40rpx;
+}
 
 .comItem{
   padding:10rpx 20rpx;

@@ -59,10 +59,12 @@ Page({
     commentInfo.where({
       picid: options.id
     }).get().then(res => {
-      console.log('where', res.data)
+      console.log('where', res.data.length)
       this.setData({
         showcomment: res.data
       })
+      console.log('length', this.data.showcomment)
+      //wx.setStorageSync('showComment', this.data.showcomment)
     })
   },
 
