@@ -12,7 +12,7 @@ Page({
    */
   data: {
     id: '',
-    detailInfo:{},
+    detailInfo:[{}],
     commentTxt: '',
     comment: '',
     commentdata: {
@@ -55,7 +55,7 @@ Page({
         this.setData({
           detailInfo:res.data
         })
-        //console.log('is get', this.data.detailInfo)    
+        console.log('is get', this.data.detailInfo)    
       }
     })
 

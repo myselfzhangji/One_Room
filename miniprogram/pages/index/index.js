@@ -1,10 +1,14 @@
 //index.js
 //获取应用实例
+
 const app = getApp()
 const db = wx.cloud.database()
 const userInfo = db.collection('userInfo')
 
 Page({
+  /* 一个商品信息可能对应多张图片
+   * 在首页index显示页面，只显示第一张图片，在detail详情页面会显示所有图片
+   */
   data: {
     list: [{}, {}],        //商品信息           
     //userList: [],        //用户信息

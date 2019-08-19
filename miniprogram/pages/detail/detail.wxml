@@ -22,8 +22,8 @@
   <view class='content flexDownC w100'>
     <view class='userInfo flexRowL w100'>
       <view class="content">{{detailInfo.title}}￥{{detailInfo.price}}</view>
-      <view wx:for="{{detailInfo.pictureCnt}}" class='user flexC '>
-        <image src='{{detailInfo.image}}' class='userImg'></image>
+      <view wx:for="{{detailInfo.pictureCnt}}" class='user flexC ' id="{{index}}">
+        <image src='{{detailInfo.image[index]}}' class='userImg'></image>
       </view>
     </view>
   </view>
