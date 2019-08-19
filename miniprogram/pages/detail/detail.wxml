@@ -19,14 +19,31 @@
 </view> -->
 
 <view class='flexDownC content'>
-  <view class='content flexDownC w100'>
+  <!-- 以下配置是一张一张图片显示 -->
+  <!-- <view class='content flexDownC w100'> 
     <view class='userInfo flexRowL w100'>
       <view class="content">{{detailInfo.title}}￥{{detailInfo.price}}</view>
-      <view wx:for="{{detailInfo.pictureCnt}}" class='user flexC ' id="{{index}}">
+      <view wx:for="{{detailInfo.pictureCnt}}" wx:key="{{index}}" class='user flexC '>
         <image src='{{detailInfo.image[index]}}' class='userImg'></image>
       </view>
     </view>
-  </view>
+  </view> -->
+
+  <!-- 以下配置是轮播图图片显示 -->
+  <swiper 
+    indicator-dots="true" 
+    indicator-active-color="#EA5149" 
+    autoplay="true" 
+    interval='3000'
+    circular="true">
+  
+  <block wx:for="{{detailInfo.pictureCnt}}" wx:key="{{index}}">
+  <swiper-item>
+    <image src="{{detailInfo.image[index]}}" class='userImg' mode="aspecFit"></image>
+  </swiper-item>
+  </block>
+
+  </swiper>
   
   <view class='garyLine'></view>
   <view class='comments flexDownC'>
