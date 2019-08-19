@@ -345,58 +345,45 @@ Page({
 
   release(e){
     //console.log('I am here', e)
+    var imageUrl = [];
+    var temp = [];
+    var uploadSuccessCnt = 0;
     for (var i = 0; i < this.data.filepath.length; i++) {
       wx.cloud.uploadFile({
         cloudPath: this.data.cloudpath[i],  // 上传至云端的路径
         filePath: this.data.filepath[i],   // 小程序临时文件路径
         success: res => {
-          console.log('I am here', res)
-          db.collection('emall').add({
-            data: {
-              title: this.data.location + '出租',
-              price: this.data.price + '/月',
-              image: res.fileID,
-              inDate: this.data.date,
-              pictureCnt : i,
-            },
-            success: res2 => {
-              //console.log(res2)
-              wx.showToast({
-                title: '新增成功',
-              })
-            },
-            fail: err => {
-              console.error('error', err)
-            }
-          })
+          //console.log('I am here', res)
+          imageUrl = imageUrl.concat(res.fileID)
+          temp = res.fileID
+          //console.log('imageUrl', imageUrl)
+          uploadSuccessCnt++;
+          //console.log('uploadSuccessCnt', uploadSuccessCnt)
+          if (uploadSuccessCnt == i){
+            db.collection('emall').add({
+              data: {
+                title: this.data.location + '出租',
+                price: this.data.price + '/月',
+                image: imageUrl,
+                inDate: this.data.date,
+                pictureCnt: i,
+              },
+              success: res2 => {
+                console.log('文件上传成功', res2)
+                wx.showToast({
+                  title: '新增成功',
+                })
+              },
+              fail: err => {
+                console.error('error', err)
+              }
+            })
+          }
         }
-        // for (var i = 0; i < tempFilePaths.length; i++) {
-        //   const tempFile = tempFilePaths[i].split('.')
-        //   const tempcloudPath = 'room-' + tempFile[tempFile.length - 2] + '.jpg'
-        //   wx.cloud.uploadFile({
-        //     cloudPath: tempcloudPath, // 上传至云端的路径
-        //     filePath: tempFilePaths[i], // 小程序临时文件路径
-        //     success: res => {
-        //       console.log(res)
-        //       db.collection('emall').add({
-        //         data: {
-        //           title: this.data.location + '出租',
-        //           price: this.data.price,
-        //           image: res.fileID
-        //         },
-        //         success: res2 => {
-        //           console.log(res2)
-        //           wx.showToast({
-        //             title: '新增成功',
-        //           })
-        //         }
-        //       })
-        //     },
-        //     fail: console.error
-        //   })
-        // }
       })
     }
+    // console.log('imageUrl', imageUrl)
+    // console.log('temp', temp)
   },
 
   getMall(e) {
