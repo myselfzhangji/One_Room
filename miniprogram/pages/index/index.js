@@ -6,7 +6,7 @@ const userInfo = db.collection('userInfo')
 
 Page({
   data: {
-    list:[],             //商品信息
+    list: [{}, {}],        //商品信息           
     //userList: [],        //用户信息
   },
 
@@ -51,7 +51,7 @@ Page({
 
     db.collection('emall').get({
       success: res => {
-        //console.log('current', res.data)
+        console.log('current', res.data)
         wx.setStorageSync('carts', res.data)
       }
     })
@@ -74,15 +74,16 @@ Page({
   // },
   getMall(isInit){
     const PAGE = 5
-    console.log('get emall')
+    //console.log('get emall')
     db.collection('emall').get({
       success: res => {
         //console.log('ujhgty', res.data)
 
         if(isInit){
           this.setData({
-            list: res.data
+            list: res.data,
           })
+          console.log('haredf', this.data.list)
         } else {
           this.setData({
             list: this.data.list.concat(res.data)
@@ -92,6 +93,7 @@ Page({
         wx.hideLoading()
       }
     })
+    //console.log('haredf', this.data.list)
   },
 
   onLoad: function () {

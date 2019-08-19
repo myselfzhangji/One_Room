@@ -49,7 +49,7 @@
   <view>
   <!-- <button>one room</button> -->
     <view wx:for="{{list}}" id="{{item._id}}" class="item-container" bindtap="toDetail">
-      <image lazy-lazy-load="true" mode='aspectFit' class="image" src="{{item.image}}"></image>
+      <image lazy-lazy-load="true" mode='aspectFit' class="image" src="{{item.image[0]}}"></image>
       <view class='content'>
         <view class="title">{{item.title}}</view>
         <view>
