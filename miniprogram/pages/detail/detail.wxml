@@ -39,7 +39,7 @@
   
   <block wx:for="{{detailInfo.pictureCnt}}" wx:key="{{index}}">
   <swiper-item>
-    <image src="{{detailInfo.image[index]}}" class='userImg' mode="aspecFit"></image>
+    <image src="{{detailInfo.image[index]}}" data-src="{{detailInfo.image}}" id="{{index}}" class='userImg' mode="aspecFit" bindtap='previewImg'></image>
   </swiper-item>
   </block>
 

@@ -235,5 +235,19 @@ Page({
       // })
     // }
     console.log(data)
+  },
+
+  /*点击图片进行预览*/
+  previewImg: function (e) {
+    console.log('haefhjhjk',e);
+    var index = e.target.id
+    var imgArr = e.target.dataset.src
+    wx.previewImage({
+      current: imgArr[index],     //当前图片地址
+      urls: imgArr,               //所有要预览的图片的地址集合 数组形式
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
   }
 })
