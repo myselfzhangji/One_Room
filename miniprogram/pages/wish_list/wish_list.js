@@ -8,7 +8,7 @@ Page({
     sliderOffset: 0,
     sliderLeft: 0,
     carts: [],
-    list:[],
+    list: [{}],
   },
 
   //获取全局的carts变量值
@@ -17,6 +17,7 @@ Page({
     this.setData({
       list: app.globalData.carts
     })
+    console.log('list content', this.data.list)
   },
   // onShow: function () {
   //   console.log('carts1', app.globalData.carts)
@@ -85,5 +86,12 @@ Page({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
+  },
+  toDetail(e) {
+    const id = e.currentTarget.id
+    wx.navigateTo({
+      url: '/pages/detail/detail?id=' + id,
+    })
+    console.log('step from index', e)
   }
 });
