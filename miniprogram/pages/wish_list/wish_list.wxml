@@ -20,10 +20,10 @@
 
 <view>
   <view wx:for="{{list}}" id="{{item._id}}" class="item-container" bindtap="toDetail">
-    <image lazy-lazy-load="true" style="width:100%;" mode='aspectFit' class="image" src="{{item.image[0]}}"></image>
+    <image lazy-lazy-load="true" stytextle="width:100%;" mode='aspectFit' class="userImg" src="{{item.image[0]}}"></image>
     <view class='content'>
     <view class="title">
-    <view class=".col-hg-10">{{item.title}}￥{{item.price}}</view>
+    <text class=".col-hg-10">{{item.title}}￥{{item.price}}</text>
     <button type="primary" size="default" class="mini-btn .col-hg-2" id="{{item._id}}" plain="true" catchtap="deletWishList">
     删除
     </button>

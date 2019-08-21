@@ -28,7 +28,7 @@ page,
 }
 
 .userImg{
-  margin-right: 10rpx;
+  /* margin-right: 10rpx; */
   width: 750rpx;   /* 在所有机型中，这个数值是全屏显示 */
   height: 370rpx;
 }
