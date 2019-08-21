@@ -7,17 +7,38 @@ Page({
     activeIndex: 1,
     sliderOffset: 0,
     sliderLeft: 0,
-    carts: [],
+    carts: [{}],
     list: [{}],
   },
 
   //获取全局的carts变量值
   onShow: function () {
     console.log('carts1', app.globalData.carts)
+    var tmep = wx.getStorageSync('carts')
+    console.log('tmep', tmep)
     this.setData({
       list: app.globalData.carts
     })
     console.log('list content', this.data.list)
+  },
+
+  deletWishList:function(e){
+    console.log('delete', e)
+    var mergelist = app.globalData.carts
+    console.log('mergelist', mergelist)
+    for (var i = 0; i < mergelist.length; i++){
+      if (e.target.id == mergelist[i]._id){
+        mergelist.splice(i,1)
+      }
+    }
+    app.globalData.carts = mergelist
+    console.log('app', app.globalData.carts)
+    wx.setStorageSync('carts', mergelist)
+    console.log('now app', wx.getStorageSync('carts'))
+    this.setData({
+      list: mergelist
+    })
+    console.log('new list', this.data.list)
   },
   // onShow: function () {
   //   console.log('carts1', app.globalData.carts)
