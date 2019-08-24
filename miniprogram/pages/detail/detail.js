@@ -181,11 +181,6 @@ Page({
     //   }, 1000)
     // } else {
       var cn = this.data.commentdata.comment.length + 1;
-      // db.collection('comments').get({
-      //   success: res => {
-      //     console.log('comments get', res)
-      //   }
-      // })
       db.collection('comments').add({
         data:{
           commentinfo: this.data.commentTxt,
