@@ -159,11 +159,13 @@ Page({
       }
       arr.push(data)
       console.log('asdf', arr)
-    } else
+    } else{
       wx.showToast({
         title: '请填写内容',
         icon: 'none'
       })
+      return
+    }
 
 
     // if (!userOpenId) {
@@ -195,45 +197,25 @@ Page({
         },
         success: res => {
           console.log('comment新增成功')
+          commentInfo.where({
+            picid: pictureId
+          }).get().then(res => {
+            console.log('where', res.data.length)
+            this.setData({
+              showcomment: res.data
+            })
+            /* 在页面显示之后,设置input输入框为空 */
+            this.setData({
+              commentTxt: ''
+            })
+            console.log('length', this.data.showcomment)
+            //wx.setStorageSync('showComment', this.data.showcomment)
+          })
         },
         fail: e => {
           console.log('comment新增失败')
         }
       })
-
-      commentInfo.where({
-        picid: pictureId
-      }).get().then(res => {
-        console.log('where', res.data.length)
-        this.setData({
-          showcomment: res.data
-        })
-        console.log('length', this.data.showcomment)
-        //wx.setStorageSync('showComment', this.data.showcomment)
-      })
-
-      // wx.cloud.callFunction({
-      //   name: 'comment',
-      //   data: {
-      //     comment: arr,
-      //     id: this.data.itemId,
-      //     commentNum: cn
-      //   },
-      //   success: res => {
-      //     wx.showToast({
-      //       title: '评论成功',
-      //     })
-      //     this.search()
-      //   },
-      //   fail: err => {
-      //     wx.showToast({
-      //       icon: 'none',
-      //       title: '评论失败',
-      //     })
-      //     console.error('[云函数] [comment] 调用失败：', err)
-      //   }
-      // })
-    // }
     console.log(data)
   },
 
