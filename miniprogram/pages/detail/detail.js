@@ -208,7 +208,7 @@ Page({
             this.setData({
               commentTxt: ''
             })
-            console.log('length', this.data.showcomment)
+            //console.log('length', this.data.showcomment)
             //wx.setStorageSync('showComment', this.data.showcomment)
           })
         },
