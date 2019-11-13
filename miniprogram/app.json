@@ -1,12 +1,12 @@
 {
   "pages": [
-    "pages/login/login",
     "pages/index/index",
     "pages/wish_list/wish_list",
     "pages/message/message",
     "pages/release_room/release_room",
     "pages/detail/detail",
-    "pages/release_room/show_release"
+    "pages/release_room/show_release",
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -40,6 +40,12 @@
         "text": "消息",
         "iconPath": "images/msg_NotSelected.png",
         "selectedIconPath": "images/msg_Selected.png"
+      },
+      {
+        "pagePath": "pages/login/login",
+        "text": "我的",
+        "iconPath": "images/Me_notSelected.png",
+        "selectedIconPath": "images/Me_selected.png"
       }
     ]
   },

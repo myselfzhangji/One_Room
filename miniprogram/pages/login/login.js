@@ -15,9 +15,9 @@ Page({
 
   /*获取用户信息，微信昵称，微信头像等等*/
   getUserInfo: function (result) {
-    wx.switchTab({
-      url: '../index/index',
-    })
+    //wx.switchTab({
+    //  url: '../index/index',
+    //})
     console.log('hello', result)
     this.setData({
       if_first_login: 1

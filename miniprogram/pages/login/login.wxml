@@ -20,7 +20,6 @@
       open-type="getUserInfo" 
       bindgetuserinfo="getUserInfo">授权登录</button>
     </view>
-    <view class='content'>One Room一间房</view>
   </view>
 </view>
 
